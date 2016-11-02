@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09396C571DCA2915007678EA /* FoodLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09396C561DCA2915007678EA /* FoodLayer.swift */; };
+		09396C591DCA2995007678EA /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09396C581DCA2995007678EA /* Food.swift */; };
+		09396C5B1DCA6BF4007678EA /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09396C5A1DCA6BF4007678EA /* Coin.swift */; };
+		09396C5D1DCA7B8F007678EA /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09396C5C1DCA7B8F007678EA /* Timer.swift */; };
 		096C2A681DC91B2E00694491 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096C2A671DC91B2E00694491 /* AppDelegate.swift */; };
 		096C2A6E1DC91B2E00694491 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096C2A6D1DC91B2E00694491 /* GameScene.swift */; };
 		096C2A701DC91B2E00694491 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096C2A6F1DC91B2E00694491 /* GameViewController.swift */; };
@@ -32,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09396C561DCA2915007678EA /* FoodLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodLayer.swift; sourceTree = "<group>"; };
+		09396C581DCA2995007678EA /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		09396C5A1DCA6BF4007678EA /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		09396C5C1DCA7B8F007678EA /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		096C2A641DC91B2E00694491 /* Yoorang Survival Mode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yoorang Survival Mode.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		096C2A671DC91B2E00694491 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		096C2A6D1DC91B2E00694491 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -153,6 +161,9 @@
 			children = (
 				096C2AA41DC9307200694491 /* Player.swift */,
 				096C2AA81DC9428F00694491 /* Control.swift */,
+				09396C581DCA2995007678EA /* Food.swift */,
+				09396C5A1DCA6BF4007678EA /* Coin.swift */,
+				09396C5C1DCA7B8F007678EA /* Timer.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -160,6 +171,7 @@
 		096C2AA21DC91D6700694491 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
+				09396C561DCA2915007678EA /* FoodLayer.swift */,
 			);
 			name = Layers;
 			sourceTree = "<group>";
@@ -251,6 +263,7 @@
 				096C2A901DC91D0A00694491 /* CGPoint+Extensions.swift in Sources */,
 				096C2A981DC91D0A00694491 /* SKTAudio.swift in Sources */,
 				096C2A911DC91D0A00694491 /* CGVector+Extensions.swift in Sources */,
+				09396C591DCA2995007678EA /* Food.swift in Sources */,
 				096C2A971DC91D0A00694491 /* SKNode+Extensions.swift in Sources */,
 				096C2A991DC91D0A00694491 /* SKTEffects.swift in Sources */,
 				096C2A701DC91B2E00694491 /* GameViewController.swift in Sources */,
@@ -259,10 +272,13 @@
 				096C2A681DC91B2E00694491 /* AppDelegate.swift in Sources */,
 				096C2A951DC91D0A00694491 /* SKAction+SpecialEffects.swift in Sources */,
 				096C2A9B1DC91D0A00694491 /* Vector3.swift in Sources */,
+				09396C571DCA2915007678EA /* FoodLayer.swift in Sources */,
 				096C2AA91DC9428F00694491 /* Control.swift in Sources */,
 				096C2A9D1DC91D2C00694491 /* Configuration.swift in Sources */,
 				096C2AA51DC9307200694491 /* Player.swift in Sources */,
+				09396C5B1DCA6BF4007678EA /* Coin.swift in Sources */,
 				096C2A921DC91D0A00694491 /* Extensions.swift in Sources */,
+				09396C5D1DCA7B8F007678EA /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +446,7 @@
 				096C2A7E1DC91B2E00694491 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -18,8 +18,8 @@ let commonPowerUpCategory: UInt32 = 0x1 << 5   //common power up category - accu
 let instantPowerUpCategory: UInt32 = 0x1 << 6  //instant power up category - instant effects including screen froze, revive etc
 let hudCategory: UInt32 = 0x1 << 7
 
-var time = 60                                  //Time per level
-var gravity:Float = 0
+var time = 0                                //Time per level
+var gravity:CGFloat = -3
 var barFilled = false
 var foodCounter = 0
 

@@ -123,12 +123,15 @@ extension SKNode{
         self.runAction((SKAction.actionWithEffect(scaleEffect)), completion: {})
     }
     
-    func addEffectToNode(startPosition:CGPoint, endPosition:CGPoint, delay:NSTimeInterval){
+    func addEffectToNode(startPosition:CGPoint, endPosition:CGPoint, delay:NSTimeInterval, action:()){
         let moveEffect = SKTMoveEffect(node: self, duration: 1, startPosition: startPosition, endPosition: endPosition)
         moveEffect.timingFunction = SKTTimingFunctionExponentialEaseInOut
         self.runAction(SKAction.afterDelay(delay, performAction: SKAction.actionWithEffect(moveEffect)), completion: {
+            action
         })
     }
+    
+    
     
     func addRepeatEffectToNode(startPosition:CGPoint, endPosition:CGPoint, delay:NSTimeInterval){
         let moveEffect = SKTMoveEffect(node: self, duration: 1, startPosition: startPosition, endPosition: endPosition)

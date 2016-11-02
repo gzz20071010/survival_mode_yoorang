@@ -16,6 +16,7 @@ class Player : SKSpriteNode
     var moveable = true
     var walkingFrames = [SKTexture]()
     var direction = 0 //-1 left, 0 stay, 1 right
+    var alive = true
     
     func update(delta: CFTimeInterval){
         walk(delta)
@@ -28,21 +29,29 @@ class Player : SKSpriteNode
     }
 
     func walk(delta: CFTimeInterval){
-        if direction == -1 {
-            self.position.x -= CGFloat(delta * 200)
-            if actionForKey("walkLeft") == nil{
+        
+//        print(self.frame.width/2)
+//        print(self.size.width/2)
+//        print(self.position)
+//        print(self.position.x + self.size.width/2)
+//        print(self.frame.width/2 + screenWidthNS)
+        if self.alive{
+            if direction == -1 && self.position.x > 0 {
+                self.position.x -= CGFloat(delta * 200)
+                if actionForKey("walkLeft") == nil{
+                    removeAllActions()
+                    walkLeftAnimation()
+                }
+            }else if direction == 1 && self.position.x < screenWidthNS {
+                self.position.x += CGFloat(delta * 200)
+                if actionForKey("walkRight") == nil{
+                    removeAllActions()
+                    walkRightAnimation()
+                }
+            }else{
                 removeAllActions()
-                walkLeftAnimation()
+                self.texture = SKTexture(imageNamed: "p3_walk1")
             }
-        }else if direction == 1 {
-            self.position.x += CGFloat(delta * 200)
-            if actionForKey("walkRight") == nil{
-                removeAllActions()
-                walkRightAnimation()
-            }
-        }else{
-            removeAllActions()
-            self.texture = SKTexture(imageNamed: "p3_walk1")
         }
     }
     
@@ -52,5 +61,15 @@ class Player : SKSpriteNode
     
     func walkRightAnimation(){
         self.runAction(SKAction.repeatActionForever(SKAction.animateWithTextures(walkingFrames, timePerFrame: 0.1)), withKey: "walkRight")
+    }
+    
+    func die(){
+        player.runAction(SKAction.rotateByAngle(90, duration: 0.5)) { 
+            player.removeFromParent()
+            backgroundNode.runAction(SKAction.fadeOutWithDuration(1), completion: {})
+        }
+        player.physicsBody?.applyImpulse(CGVectorMake(5, 10))
+        gameState = .gameOver
+        //scene?.paused = true
     }
 }
