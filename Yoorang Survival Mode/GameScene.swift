@@ -18,9 +18,10 @@ enum GameState {
 
 var player = Player()
 let foodLayer = FoodLayer()
+var progressBar = ProgressBar()
 var timeSpan = 0.0
 //Backgound
-var backgroundNode:SKSpriteNode!
+var backgroundNode:BackgroundLayer!
 var gameState = GameState.gamePaused
 
 
@@ -58,8 +59,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addLayers(){
         
         //add white background
-        backgroundNode = SKSpriteNode(color: SKColorWithRGB(255, g: 255, b: 255), size: CGSizeMake(screenWidthNS, screenHeightNS))
+        backgroundNode = BackgroundLayer()
+        backgroundNode.size = CGSizeMake(screenWidthNS, screenHeightNS)
         backgroundNode.anchorPoint = CGPointZero
+        backgroundNode.addBackground()
         addChild(backgroundNode)
         
         //add hud
@@ -70,13 +73,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         hudMode = SKSpriteNode(imageNamed: "mode")
         hudMode.position = CGPointMake(screenWidthNS*1.3/3, screenHeightNS + hudMode.size.height)
-        hudMode.zPosition = 1
+        hudMode.zPosition = 2
         hudMode.size = CGSizeMake(screenWidthNS/2, screenWidthNS/2*119/315)
         hudMode.addPhysicsBodyWithSize(hudMode.size, gravity: true, dynamic: true, rotation: true, friction: 10.0, restitution: 0.2, categoryBitMask: hudCategory, contactTestBitMask: hudCategory, collisionBitMask: hudCategory|groundCategory)
         
         hudSurvival = SKSpriteNode(imageNamed: "survival")
         hudSurvival.position = CGPointMake(screenWidthNS*1.01/2, screenHeightNS + hudSurvival.size.height*2.5)
-        hudSurvival.zPosition = 1
+        hudSurvival.zPosition = 2
         hudSurvival.size = CGSizeMake(screenWidthNS/2, screenWidthNS/2*119/315)
         hudSurvival.addPhysicsBodyWithSize(hudSurvival.size, gravity: true, dynamic: true, rotation: true, friction: 10.0, restitution: 0.1, categoryBitMask: hudCategory, contactTestBitMask: hudCategory, collisionBitMask: hudCategory|groundCategory)
         
@@ -90,6 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.texture = SKTexture(imageNamed: "p3_walk1")
         player.size = CGSizeMake(screenWidthNS/10, screenWidthNS/10*97/72)
         player.position = CGPointMake(screenWidthNS/2, screenHeightNS/8 + player.size.height/2)
+        player.zPosition = 2
         player.setUpFrames()
         player.physicsBody = SKPhysicsBody(texture: player.texture!, alphaThreshold: 0.8, size: player.size)
         player.physicsBody?.affectedByGravity = true
@@ -104,6 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         control = Control(imageNamed: "Rectangle 1")
         control.size = CGSizeMake(screenWidthNS, screenHeightNS/4)
         control.position = CGPointMake(screenWidthNS/2, 0)
+        control.zPosition = 100
         control.userInteractionEnabled = true
         control.addPhysicsBodyWithSize(control.size, gravity: false, dynamic: false, rotation: false, friction: 1.0, restitution: 0.3, categoryBitMask: groundCategory, contactTestBitMask: playerCategory | commonPowerUpCategory | spoilFoodCategory, collisionBitMask: commonPowerUpCategory)
         backgroundNode.addChild(control)
@@ -116,6 +121,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timer.zPosition = 4
         timer.position = CGPointMake(screenWidthNS/2, screenHeightNS*7/8)
         backgroundNode.addChild(timer)
+        
+        progressBar = ProgressBar(imageNamed: "progressBar")
+        progressBar.size = CGSizeMake(screenWidthNS/20, screenWidthNS/20*685/55)
+        progressBar.position = CGPointMake(screenWidthNS/7, screenHeightNS/2)
+        progressBar.hidden = true
+        progressBar.alpha = 0.5
+        backgroundNode.addChild(progressBar)
         
         backgroundNode.addChild(foodLayer)
     }
@@ -131,8 +143,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.hudSurvival.removeFromParent()
                 self.invisibleGround.removeFromParent()
                 gameState = .gameStart
-                gravity = CGFloat(-1)
+                gravity = CGFloat(-5)
                 self.physicsWorld.gravity = CGVector(dx: 0.0, dy: gravity);
+                progressBar.hidden = false
             }
             hudMode.addEffectToHud()
             hudSurvival.addEffectToHud(action)
@@ -150,10 +163,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if nodeA.landed == false && nodeA.foodType == FoodType.coin{
                     nodeA.openCoinBox()
                 }
+                if nodeA.landed == false && nodeA.foodType == FoodType.energy{
+                    nodeA.openEnergyBox()
+                }
                 nodeA.landed = true
             }else if let nodeB = contact.bodyB.node as? Food{
                 if nodeB.landed == false && nodeB.foodType == FoodType.coin{
                     nodeB.openCoinBox()
+                }
+                if nodeB.landed == false && nodeB.foodType == FoodType.energy{
+                    nodeB.openEnergyBox()
                 }
                 nodeB.landed = true
             }
@@ -162,18 +181,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let nodeA = contact.bodyA.node as? Food{
                 nodeA.collected = true
                 if nodeA.foodType == FoodType.snow{
-                    paused = true
+                    nodeA.froze()
                 }
             }else if let nodeB = contact.bodyB.node as? Food{
                 nodeB.collected = true
                 if nodeB.foodType == FoodType.snow{
-                    paused = true
+                    nodeB.froze()
                 }
             }else if let nodeA = contact.bodyA.node as? Coin{
                 nodeA.collect()
             }else if let nodeB = contact.bodyB.node as? Coin{
                 nodeB.collect()
+            }else if let nodeA = contact.bodyA.node as? Gem{
+                nodeA.collect()
+            }else if let nodeB = contact.bodyB.node as? Gem{
+                nodeB.collect()
             }
+
             
         case spoilFoodCategory | playerCategory:
             if let nodeA = contact.bodyA.node as? Player{
@@ -215,7 +239,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gameState == .gameStart{
             if oldTime == 0 {oldTime = currentTime}
             if oldTime1 == 0 {oldTime1 = currentTime}
-            if currentTime - oldTime >= timeSpan*3 {
+            
+            if currentTime - oldTime >= 2 {
                 foodLayer.updatePattern()
                 oldTime = 0
             }
@@ -227,7 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         player.update(dt)
         foodLayer.update(dt)
-        
+        backgroundNode.update(dt)
     }
 }
 

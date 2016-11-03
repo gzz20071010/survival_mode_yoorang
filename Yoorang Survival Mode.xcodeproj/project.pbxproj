@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0927CCA11DCBACD800AAC5AC /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0927CCA01DCBACD800AAC5AC /* ProgressBar.swift */; };
+		0927CCA31DCBAE5C00AAC5AC /* Gem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0927CCA21DCBAE5C00AAC5AC /* Gem.swift */; };
+		0927CCA51DCBE73200AAC5AC /* BackgroundLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0927CCA41DCBE73200AAC5AC /* BackgroundLayer.swift */; };
 		09396C571DCA2915007678EA /* FoodLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09396C561DCA2915007678EA /* FoodLayer.swift */; };
 		09396C591DCA2995007678EA /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09396C581DCA2995007678EA /* Food.swift */; };
 		09396C5B1DCA6BF4007678EA /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09396C5A1DCA6BF4007678EA /* Coin.swift */; };
@@ -36,6 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0927CCA01DCBACD800AAC5AC /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		0927CCA21DCBAE5C00AAC5AC /* Gem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gem.swift; sourceTree = "<group>"; };
+		0927CCA41DCBE73200AAC5AC /* BackgroundLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundLayer.swift; sourceTree = "<group>"; };
 		09396C561DCA2915007678EA /* FoodLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodLayer.swift; sourceTree = "<group>"; };
 		09396C581DCA2995007678EA /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		09396C5A1DCA6BF4007678EA /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
@@ -164,6 +170,8 @@
 				09396C581DCA2995007678EA /* Food.swift */,
 				09396C5A1DCA6BF4007678EA /* Coin.swift */,
 				09396C5C1DCA7B8F007678EA /* Timer.swift */,
+				0927CCA01DCBACD800AAC5AC /* ProgressBar.swift */,
+				0927CCA21DCBAE5C00AAC5AC /* Gem.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -172,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				09396C561DCA2915007678EA /* FoodLayer.swift */,
+				0927CCA41DCBE73200AAC5AC /* BackgroundLayer.swift */,
 			);
 			name = Layers;
 			sourceTree = "<group>";
@@ -270,6 +279,7 @@
 				096C2A8F1DC91D0A00694491 /* CGFloat+Extensions.swift in Sources */,
 				096C2A931DC91D0A00694491 /* Int+Extensions.swift in Sources */,
 				096C2A681DC91B2E00694491 /* AppDelegate.swift in Sources */,
+				0927CCA31DCBAE5C00AAC5AC /* Gem.swift in Sources */,
 				096C2A951DC91D0A00694491 /* SKAction+SpecialEffects.swift in Sources */,
 				096C2A9B1DC91D0A00694491 /* Vector3.swift in Sources */,
 				09396C571DCA2915007678EA /* FoodLayer.swift in Sources */,
@@ -278,7 +288,9 @@
 				096C2AA51DC9307200694491 /* Player.swift in Sources */,
 				09396C5B1DCA6BF4007678EA /* Coin.swift in Sources */,
 				096C2A921DC91D0A00694491 /* Extensions.swift in Sources */,
+				0927CCA11DCBACD800AAC5AC /* ProgressBar.swift in Sources */,
 				09396C5D1DCA7B8F007678EA /* Timer.swift in Sources */,
+				0927CCA51DCBE73200AAC5AC /* BackgroundLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
